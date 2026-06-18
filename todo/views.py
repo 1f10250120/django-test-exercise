@@ -11,7 +11,7 @@ def index(request):
         task.save()
         
     if request.GET.get("order") == "due":
-        tasks = Task.object,order_by("due_at")
+        tasks = Task.objects.order_by("due_at")
     else:
         tasks = Task.objects.order_by("-posted_at")
 

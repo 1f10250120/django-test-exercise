@@ -45,6 +45,23 @@ class TodoViewTestCase(TestCase):
         self.assertEqual(response.templates[0].name, 'todo/index.html')
         self.assertEqual(len(response.context['tasks']), 0)
     
+    def test_index_get_with_tasks(self):
+        # 事前にテスト用のデータをデータベースに作成
+        Task.objects.create(title="テスト用のタスク", due_at=timezone.now())
+        
+        client = Client()
+        response = client.get('/')
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.templates[0].name, 'todo/index.html')
+        self.assertEqual(len(response.context['tasks']), 1)
+    
+    def test_invalid_page_get(self):
+        client = Client()
+        response = client.get('/this-page-does-not-exist/')
+        
+        self.assertEqual(response.status_code, 404)
+
     def test_index_post(self):
         client = Client()
         data = {'title': 'Test Task', 'due_at': '2024-06-30 23:59:59'}
