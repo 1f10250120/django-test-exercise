@@ -5,13 +5,13 @@ from todo.models import Task
 
 # Create your tests here.
 class SampletestCase(TestCase):
-    
+
     def test_sample(self):
         self.assertEqual(1 + 2, 3)
 
 
 class TaskModelTestCase(TestCase):
-    
+
     def test_create_task1(self):
         due = timezone.make_aware(datetime(2024, 6, 30, 23, 56, 59))
         task = Task(title="task1", due_at=due)
@@ -54,7 +54,7 @@ class TaskModelTestCase(TestCase):
 
 
 class TodoViewTestCase(TestCase):
-    
+
     def test_index_get(self):
         client = Client()
         response = client.get('/')
