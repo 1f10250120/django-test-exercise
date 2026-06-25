@@ -69,7 +69,7 @@ class TodoViewTestCase(TestCase):
         client = Client()
         response = client.get("/1/")
 
-        self.assertEqual(response.status_codem, 404)
+        self.assertEqual(16          self.assertEqual(response.status_code, 404))
 
     def test_index_get(self):
         client = Client()
